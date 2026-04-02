@@ -1,0 +1,95 @@
+---
+title: "Tools & integrations"
+description: "Developer tools and apps built on React Native Directory data."
+---
+
+These tools are built on top of React Native Directory data to help you find, evaluate, and manage React Native libraries from inside your editor, terminal, or launcher.
+
+## CLI tools
+
+<CardGroup cols={2}>
+  <Card
+    title="React Native Directory CLI"
+    icon="terminal"
+    href="https://www.npmjs.com/package/rn-directory"
+  >
+    Propose new entries to React Native Directory directly from your terminal. The `rn-directory` CLI gathers the required information manually or automatically, creates a fork, and opens a pull request on behalf of the user currently logged in to the GitHub CLI.
+  </Card>
+  <Card
+    title="expo-doctor"
+    icon="stethoscope"
+    href="https://www.npmjs.com/package/expo-doctor"
+  >
+    CLI to check your Expo project for known issues and library compatibility with your current SDK version.
+  </Card>
+</CardGroup>
+
+## Editor extensions
+
+<CardGroup cols={2}>
+  <Card
+    title="VS Code extension"
+    icon="code"
+    href="https://marketplace.visualstudio.com/items?itemName=react-native-directory.vscode-react-native-directory"
+  >
+    Browse React Native Directory and perform actions for a chosen package inside the built-in Command Palette.
+  </Card>
+  <Card
+    title="React Native Package Checker VS Code extension"
+    icon="shield-check"
+    href="https://marketplace.visualstudio.com/items?itemName=sandipshiwakoti.vscode-react-native-package-checker"
+  >
+    Check New Architecture compatibility and version requirements for React Native packages without leaving VS Code.
+  </Card>
+</CardGroup>
+
+## Web tools
+
+<CardGroup cols={2}>
+  <Card
+    title="React Native Package Checker"
+    icon="magnifying-glass"
+    href="https://react-native-package-checker.vercel.app"
+  >
+    Analyze React Native packages for New Architecture compatibility, check multiple packages at once, get detailed insights, and export reports.
+  </Card>
+  <Card
+    title="Raycast extension"
+    icon="bolt"
+    href="https://www.raycast.com/shubh_porwal/react-native-directory"
+  >
+    A searchable and filterable list of React Native libraries inside Raycast.
+  </Card>
+</CardGroup>
+
+## Source code
+
+| Tool | GitHub |
+|------|--------|
+| React Native Directory CLI | [Simek/rn-directory](https://github.com/Simek/rn-directory) |
+| VS Code extension | [react-native-community/vscode-react-native-directory](https://github.com/react-native-community/vscode-react-native-directory) |
+| Raycast extension | [raycast/extensions](https://github.com/raycast/extensions/tree/main/extensions/react-native-directory) |
+| expo-doctor | [expo/expo](https://github.com/expo/expo/tree/main/packages/expo-doctor) |
+| React Native Package Checker | [sandipshiwakoti/react-native-package-checker](https://github.com/sandipshiwakoti/react-native-package-checker) |
+| React Native Package Checker VS Code extension | [sandipshiwakoti/vscode-react-native-package-checker](https://github.com/sandipshiwakoti/vscode-react-native-package-checker) |
+
+## LLM and AI integration
+
+React Native Directory exposes two machine-readable endpoints for use with AI tools and LLMs.
+
+<CardGroup cols={2}>
+  <Card
+    title="llms.txt"
+    icon="robot"
+    href="https://reactnative.directory/llms.txt"
+  >
+    Compact machine-readable library list. Use this when token budget is a concern.
+  </Card>
+  <Card
+    title="llms-full.txt"
+    icon="database"
+    href="https://reactnative.directory/llms-full.txt"
+  >
+    Full dataset for AI tools that need complete library metadata including scores, platform support, and compatibility information.
+  </Card>
+</CardGroup>

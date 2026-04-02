@@ -1,97 +1,61 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "React Native Directory"
+description: "A searchable and filterable directory of 2,300+ React Native libraries with compatibility metadata, quality scoring, and a public JSON API."
 ---
 
-## Setting up
+React Native Directory helps you discover and evaluate libraries for your React Native projects. Browse by platform compatibility, filter by New Architecture support, check quality scores, and access library data programmatically through a public JSON API.
 
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Browse the directory" icon="magnifying-glass" href="https://reactnative.directory">
+    Search and filter 2,300+ React Native libraries by platform, architecture, and quality.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="API Reference" icon="code" href="/api/overview">
+    Access library data programmatically via the public JSON API.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Add a library" icon="plus" href="/contributing/adding-a-library">
+    Submit your React Native library to be listed in the directory.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Understand scoring" icon="chart-bar" href="/scoring/directory-score">
+    Learn how Directory Scores and Trending Scores are calculated.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## What you can do
 
-Everything you need to create world-class documentation.
+<CardGroup cols={3}>
+  <Card title="Filter by platform" icon="mobile" href="/using/filtering">
+    Find libraries that work on iOS, Android, Web, Windows, macOS, tvOS, visionOS, and more.
+  </Card>
+  <Card title="Check New Architecture" icon="microchip" href="/using/filtering">
+    Filter by New Architecture support, Expo modules, Nitro modules, and Turbo modules.
+  </Card>
+  <Card title="Save bookmarks" icon="bookmark" href="/using/bookmarks">
+    Bookmark libraries and filter to your personal list from any device.
+  </Card>
+  <Card title="Explore tools" icon="wrench" href="/tools/overview">
+    Use CLI tools, VS Code and Raycast extensions powered by directory data.
+  </Card>
+  <Card title="Self-host" icon="server" href="/tools/self-hosting">
+    Run your own instance of React Native Directory with your own data.
+  </Card>
+  <Card title="Contribute" icon="code-pull-request" href="/contributing/adding-a-library">
+    Add or update library entries by submitting a pull request.
+  </Card>
+</CardGroup>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## Quick start
 
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<Steps>
+  <Step title="Visit the directory">
+    Go to [reactnative.directory](https://reactnative.directory) to browse and search libraries.
+  </Step>
+  <Step title="Filter for your needs">
+    Use the filter panel to narrow results by platform (iOS, Android, Web), architecture support, and quality criteria.
+  </Step>
+  <Step title="Evaluate a library">
+    Click any library card to view its GitHub stats, npm downloads, platform compatibility, New Architecture support, and Directory Score.
+  </Step>
+  <Step title="Integrate via API">
+    Use the [public JSON API](/api/overview) to fetch library data programmatically for tooling, CI checks, or your own applications.
+  </Step>
+</Steps>

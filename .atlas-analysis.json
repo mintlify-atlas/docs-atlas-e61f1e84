@@ -1,24 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "React Native Directory",
+  "projectType": "saas",
+  "projectName": "React Native Directory",
+  "projectDescription": "A searchable and filterable web directory of React Native libraries with compatibility metadata, quality scoring, and a public JSON API.",
   "theme": "luma",
-  "colors": {
-    "primary": "#64dcfb",
-    "light": "#3c7c8c",
-    "dark": "#14141c"
-  },
-  "favicon": "https://media.brand.dev/1e7480af-0a90-4255-86c8-9bba97720668.png",
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/react-native-community/directory"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/react-native-community/directory"
-    }
-  },
+  "primaryColor": "#64dcfb",
+  "lightColor": "#3c7c8c",
+  "darkColor": "#14141c",
   "navigation": {
     "tabs": [
       {
@@ -81,5 +68,24 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Searchable and filterable catalog of 2,300+ React Native libraries",
+    "Platform compatibility tags (iOS, Android, Web, Windows, macOS, tvOS, visionOS, etc.)",
+    "New Architecture support detection and filtering",
+    "Directory Score: multi-factor quality scoring for each library",
+    "Trending Score: popularity growth metric based on download trends",
+    "Bookmarks: cookie-based personal library watchlist",
+    "Public JSON API for programmatic access",
+    "Expo Go and config plugin compatibility tracking",
+    "LLM-friendly export (llms.txt and llms-full.txt)",
+    "VS Code extension, CLI tool, and Raycast extension integrations"
+  ],
+  "publicApiSurface": [
+    "GET /api/libraries — list, search, filter, and paginate libraries",
+    "POST /api/libraries/check — batch compatibility metadata lookup by npm package names",
+    "GET /api/libraries/statistic — aggregated dataset statistics",
+    "GET /api/library — lookup one or more libraries by npm package name",
+    "GET /api/proxy/npm-stat — proxy to npm-stat.com for download count history"
+  ]
 }

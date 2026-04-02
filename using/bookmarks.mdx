@@ -1,0 +1,39 @@
+---
+title: "Bookmarks"
+description: "Save libraries to your personal bookmark list."
+---
+
+Bookmarks let you save libraries as you browse and return to your saved list at any time. They are stored entirely in your browser and require no account.
+
+## Saving a library
+
+Click the **bookmark icon** on any library card to save it. Clicking the icon again removes the bookmark. The icon updates immediately to reflect the current state.
+
+## Viewing your bookmarks
+
+Use the **Bookmarks** toggle in the filter panel on `/packages` to show only your saved libraries. This sets the `bookmarks=true` query parameter:
+
+```
+https://reactnative.directory/packages?bookmarks=true
+```
+
+<Note>
+  Responses filtered by bookmarks are not publicly cached. The server reads your bookmark cookie on each request to return the correct set of libraries.
+</Note>
+
+## How bookmarks are stored
+
+Bookmarks are persisted as a browser cookie named `rnd_bookmarks`. The cookie:
+
+- Is set with `SameSite=Lax` and `path=/`
+- Has a max-age of one year, so it survives browser restarts
+- Stores a JSON array of library IDs (npm package names)
+- Is read client-side by the bookmark UI and server-side by the `/api/libraries` endpoint when the `bookmarks` filter is active
+
+## Limitations
+
+<Warning>
+  Bookmarks are browser-local. They are not synced across devices or browsers. If you clear your cookies, your bookmarks are lost.
+</Warning>
+
+Because bookmarks live in a cookie, they are tied to the specific browser and device where you saved them. There is no account or cloud sync.

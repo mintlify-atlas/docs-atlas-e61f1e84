@@ -1,0 +1,146 @@
+---
+title: "GET /api/libraries/statistic"
+description: "Retrieve aggregated statistics about the React Native Directory dataset."
+---
+
+Returns a single JSON object containing aggregated counts across the entire React Native Directory dataset — library totals, platform support counts, download sums, and package manager distribution.
+
+- **Method:** GET
+- **Path:** `/api/libraries/statistic`
+
+## Query parameters
+
+None. This endpoint takes no query parameters.
+
+## Response
+
+<ResponseField name="total" type="number" required>
+  Total number of libraries in the directory.
+</ResponseField>
+
+<ResponseField name="newArchitecture" type="number" required>
+  Number of libraries that support React Native's New Architecture (status `supported` or `new-arch-only`).
+</ResponseField>
+
+<ResponseField name="downloads" type="number" required>
+  Sum of monthly npm downloads across all libraries.
+</ResponseField>
+
+<ResponseField name="weekDownloads" type="number" required>
+  Sum of weekly npm downloads across all libraries.
+</ResponseField>
+
+<ResponseField name="unmaintained" type="number" required>
+  Number of libraries marked as unmaintained.
+</ResponseField>
+
+<ResponseField name="withTypes" type="number" required>
+  Number of libraries that ship TypeScript type definitions.
+</ResponseField>
+
+<ResponseField name="withNativeCode" type="number" required>
+  Number of libraries that contain native code.
+</ResponseField>
+
+<ResponseField name="withConfigPlugin" type="number" required>
+  Number of libraries that provide an Expo Config Plugin.
+</ResponseField>
+
+<ResponseField name="ios" type="number" required>
+  Number of libraries that support iOS.
+</ResponseField>
+
+<ResponseField name="android" type="number" required>
+  Number of libraries that support Android.
+</ResponseField>
+
+<ResponseField name="web" type="number" required>
+  Number of libraries that support Web.
+</ResponseField>
+
+<ResponseField name="expoGo" type="number" required>
+  Number of libraries that work in Expo Go.
+</ResponseField>
+
+<ResponseField name="windows" type="number" required>
+  Number of libraries that support Windows.
+</ResponseField>
+
+<ResponseField name="macos" type="number" required>
+  Number of libraries that support macOS.
+</ResponseField>
+
+<ResponseField name="fireos" type="number" required>
+  Number of libraries that support Fire OS.
+</ResponseField>
+
+<ResponseField name="horizon" type="number" required>
+  Number of libraries that support Horizon.
+</ResponseField>
+
+<ResponseField name="tvos" type="number" required>
+  Number of libraries that support tvOS.
+</ResponseField>
+
+<ResponseField name="visionos" type="number" required>
+  Number of libraries that support visionOS.
+</ResponseField>
+
+<ResponseField name="vegaos" type="number" required>
+  Number of libraries that support VegaOS.
+</ResponseField>
+
+<ResponseField name="packageManager" type="object" required>
+  Distribution of detected package managers across library repositories.
+
+  <Expandable title="packageManager fields">
+    <ResponseField name="bun" type="number" required>
+      Number of repositories using Bun.
+    </ResponseField>
+    <ResponseField name="pnpm" type="number" required>
+      Number of repositories using pnpm.
+    </ResponseField>
+    <ResponseField name="npm" type="number" required>
+      Number of repositories using npm.
+    </ResponseField>
+    <ResponseField name="yarn" type="number" required>
+      Number of repositories using Yarn.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example
+
+```bash
+curl "https://reactnative.directory/api/libraries/statistic"
+```
+
+```json
+{
+  "total": 2326,
+  "newArchitecture": 1570,
+  "downloads": 7380762848,
+  "weekDownloads": 1391864468,
+  "unmaintained": 797,
+  "withTypes": 1626,
+  "withNativeCode": 1123,
+  "withConfigPlugin": 243,
+  "ios": 2199,
+  "android": 2188,
+  "web": 506,
+  "expoGo": 972,
+  "windows": 67,
+  "macos": 44,
+  "fireos": 216,
+  "horizon": 3,
+  "tvos": 100,
+  "visionos": 32,
+  "vegaos": 55,
+  "packageManager": {
+    "bun": 85,
+    "pnpm": 132,
+    "npm": 402,
+    "yarn": 1334
+  }
+}
+```

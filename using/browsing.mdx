@@ -1,0 +1,89 @@
+---
+title: "Browsing libraries"
+description: "Navigate React Native Directory to find libraries for your project."
+---
+
+React Native Directory is available at [reactnative.directory](https://reactnative.directory). It offers three main views for discovering libraries.
+
+## Views
+
+<CardGroup cols={3}>
+  <Card title="Homepage" icon="house" href="https://reactnative.directory">
+    Featured libraries including recently added, recently updated, and most-downloaded entries.
+  </Card>
+  <Card title="/packages" icon="list" href="https://reactnative.directory/packages">
+    The full searchable and filterable catalog of every library in the directory.
+  </Card>
+  <Card title="/popular" icon="fire" href="https://reactnative.directory/popular">
+    Top libraries per platform, ranked by popularity score among maintained libraries.
+  </Card>
+</CardGroup>
+
+<Card title="/trending" icon="arrow-trend-up" href="https://reactnative.directory/trending">
+  Libraries with a popularity score above 15 and at least 5,000 monthly downloads, ordered by popularity growth.
+</Card>
+
+## What each library card shows
+
+Every library card surfaces the key signals you need to evaluate a package at a glance:
+
+| Signal | Details |
+|---|---|
+| **Name and description** | The npm package name and its GitHub description |
+| **Platform badges** | iOS, Android, Web, Windows, macOS, tvOS, visionOS, Fire OS, Horizon OS, Vega OS, Expo Go |
+| **New Architecture badge** | Whether the library supports the New Architecture |
+| **Directory Score** | A computed quality score (0–100) based on maintenance, popularity, and documentation |
+| **Download count** | Monthly npm download count |
+| **GitHub stars** | Total star count from GitHub |
+
+Click any card to open the library detail page, which includes full GitHub stats, npm download history, version list, readme, and changelog.
+
+## Sort options
+
+On `/packages` you can sort results using the `order` query parameter. The available sort orders are:
+
+<AccordionGroup>
+  <Accordion title="relevance">
+    Applied automatically when you enter a search term. Ranks results by how closely they match your query.
+  </Accordion>
+  <Accordion title="updated">
+    Most recently pushed to GitHub first.
+  </Accordion>
+  <Accordion title="added">
+    Most recently added to the directory first.
+  </Accordion>
+  <Accordion title="released">
+    Most recently published to npm first.
+  </Accordion>
+  <Accordion title="quality">
+    Highest Directory Score first.
+  </Accordion>
+  <Accordion title="popularity">
+    Highest popularity score first (used by /popular and /trending).
+  </Accordion>
+  <Accordion title="downloads">
+    Most monthly npm downloads first.
+  </Accordion>
+  <Accordion title="issues">
+    Most open GitHub issues first.
+  </Accordion>
+  <Accordion title="stars">
+    Most GitHub stars first.
+  </Accordion>
+  <Accordion title="dependencies">
+    Most npm dependencies first.
+  </Accordion>
+  <Accordion title="size">
+    Largest bundle size first.
+  </Accordion>
+</AccordionGroup>
+
+You can also reverse any sort order by setting `direction=ascending` in the URL.
+
+## Pagination
+
+The `/packages` view paginates results using `offset` and `limit` query parameters. The default page size is **30 libraries per page**. Use the pagination controls at the top and bottom of the list, or set these parameters directly in the URL.
+
+```
+https://reactnative.directory/packages?offset=30&limit=30
+```

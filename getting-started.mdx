@@ -1,0 +1,119 @@
+---
+title: "Getting started"
+description: "Start using React Native Directory to find and evaluate React Native libraries."
+---
+
+React Native Directory gives you several ways to discover and evaluate libraries: the website, a public API, and a VS Code extension. This page walks you through each one.
+
+## Using the website
+
+Visit [reactnative.directory](https://reactnative.directory) to start browsing. The home page highlights recently added, recently updated, and most-downloaded libraries. The full catalog is at [reactnative.directory/packages](https://reactnative.directory/packages).
+
+<Steps>
+  <Step title="Search for a library">
+    Type a package name, keyword, or topic into the search bar. Results are ranked by relevance when a search term is present, or by your chosen sort order otherwise.
+  </Step>
+  <Step title="Apply filters">
+    Use the filter panel to narrow results by:
+
+    - **Platform** — iOS, Android, Web, Windows, macOS, tvOS, visionOS, Fire OS, Horizon OS, Vega OS, Expo Go
+    - **Architecture** — New Architecture support, Expo module, Nitro module, Turbo module
+    - **Quality** — maintained, popular, recently updated, has TypeScript types, has native code
+    - **Category** — skip dev tools, skip templates, and more
+  </Step>
+  <Step title="Review a library">
+    Each library card shows:
+
+    - Platform compatibility tags
+    - New Architecture support status
+    - Directory Score (0–100)
+    - Monthly and weekly npm download counts
+    - GitHub stars and open issue count
+    - Last updated date
+
+    Click a library to see the full detail page, including version history, a score breakdown, and links to the GitHub repository and npm package.
+  </Step>
+  <Step title="Bookmark libraries">
+    Click the bookmark icon on any library card to save it. Your bookmarks are stored as a browser cookie. Use the **Bookmarks** filter to view only your saved libraries.
+  </Step>
+</Steps>
+
+## Using the API
+
+The public JSON API lets you query directory data programmatically — useful for CI tooling, editor extensions, or custom dashboards.
+
+<Note>
+  The API does not require authentication for read-only requests.
+</Note>
+
+The main endpoint is `GET /api/libraries`. It supports full-text search, platform and architecture filters, sort order, and pagination.
+
+```bash
+# Search for image libraries sorted by downloads
+GET https://reactnative.directory/api/libraries?search=image&order=downloads&limit=5
+```
+
+A response includes a `libraries` array and a `total` count. Each library object contains platform tags, New Architecture status, GitHub stats, npm download counts, and a `score` field.
+
+```json
+{
+  "libraries": [
+    {
+      "npmPkg": "expo-image",
+      "ios": true,
+      "android": true,
+      "web": true,
+      "newArchitecture": true,
+      "score": 90,
+      "npm": {
+        "downloads": 5883973,
+        "weekDownloads": 1011061
+      }
+    }
+  ],
+  "total": 142
+}
+```
+
+For the full endpoint reference, query parameters, and additional endpoints, see the [API overview](/api/overview).
+
+## VS Code extension
+
+The official VS Code extension brings React Native Directory into your editor so you can evaluate libraries without switching context.
+
+<Tip>
+  The extension is available at [github.com/react-native-community/vscode-react-native-directory](https://github.com/react-native-community/vscode-react-native-directory).
+</Tip>
+
+## Quick links
+
+<CardGroup cols={2}>
+  <Card
+    title="API overview"
+    icon="code"
+    href="/api/overview"
+  >
+    Full reference for all API endpoints, query parameters, and response shapes.
+  </Card>
+  <Card
+    title="Adding a library"
+    icon="plus"
+    href="/contributing/adding-a-library"
+  >
+    Submit your package to get it listed in the directory.
+  </Card>
+  <Card
+    title="Directory Score"
+    icon="chart-bar"
+    href="/scoring/directory-score"
+  >
+    Learn how each library's quality score is calculated.
+  </Card>
+  <Card
+    title="New Architecture"
+    icon="bolt"
+    href="/contributing/platform-compatibility"
+  >
+    Understand how New Architecture support is declared and detected.
+  </Card>
+</CardGroup>

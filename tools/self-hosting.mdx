@@ -1,0 +1,105 @@
+---
+title: "Self-hosting"
+description: "Run your own instance of React Native Directory."
+---
+
+You can run a local instance of React Native Directory for development or to host your own copy.
+
+## Prerequisites
+
+- [Bun 1.2+](https://bun.sh/)
+
+## Run locally
+
+<Steps>
+  <Step title="Install dependencies and start the dev server">
+    ```bash
+    bun install && bun start
+    ```
+  </Step>
+  <Step title="Open the app">
+    Visit [localhost:3000](http://localhost:3000) in your browser.
+  </Step>
+</Steps>
+
+## Update library data
+
+The site data is generated from the library registry using the GitHub API. To regenerate it, you need a GitHub personal access token.
+
+<Steps>
+  <Step title="Create a GitHub token">
+    Visit [github.com/settings/developers](https://github.com/settings/developers) and create a new personal access token.
+  </Step>
+  <Step title="Run the data update script">
+    ```bash
+    GITHUB_TOKEN=<token> bun data:update
+    ```
+
+    This writes the generated data to `assets/data.json`.
+  </Step>
+</Steps>
+
+<Tip>
+  Set `ONLY_WRITE_LOCAL_DATA_FILE` to `true` in `scripts/build-and-score-data.ts` to skip Vercel Blob storage and use the local `assets/data.json` file instead.
+</Tip>
+
+## Key scripts
+
+<CodeGroup>
+
+```bash Development
+bun start
+```
+
+```bash Build
+bun build
+```
+
+```bash Data
+# Rebuild and score all library data
+bun data:update
+
+# Update only missing entries
+bun data:update-missing
+
+# Validate the library registry
+bun data:validate
+```
+
+```bash Libraries
+# Remove invalid keys and redundant fields
+bun libraries:cleanup
+
+# Check resource availability
+bun libraries:check
+```
+
+```bash LLMs
+# Generate llms.txt and llms-full.txt
+bun llms:generate
+```
+
+```bash Lint
+bun lint
+```
+
+</CodeGroup>
+
+## Deploy to production
+
+The site is hosted on Vercel. To deploy your own instance:
+
+<Steps>
+  <Step title="Set the GITHUB_TOKEN environment variable">
+    Add `GITHUB_TOKEN` to your Vercel project environment variables. The build step runs `bun data:update`, which requires this token.
+  </Step>
+  <Step title="Deploy with the Vercel CLI">
+    ```bash
+    bunx vercel
+    ```
+  </Step>
+</Steps>
+
+<Note>
+  `bun build` runs `bun data:update` as part of the build process, so a valid `GITHUB_TOKEN` is required for every production build.
+</Note>

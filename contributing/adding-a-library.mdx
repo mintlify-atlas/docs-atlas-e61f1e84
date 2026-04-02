@@ -1,0 +1,98 @@
+---
+title: "Adding a library"
+description: "Submit your React Native library to be listed in the React Native Directory."
+---
+
+## Prerequisites
+
+Before submitting, make sure your library meets both of these requirements:
+
+- **Published to npm** — the directory pulls package metadata (name, description, keywords, download counts) directly from the npm registry. Your package must exist there before you open a PR.
+- **Hosted on GitHub** — only GitHub repository URLs are currently supported. The `githubUrl` field must point to a public GitHub repository.
+
+<Warning>
+  If your package was published to npm very recently, the npm API can take up to 24 hours to return data for it. If CI fails with an npm fetch error, wait and re-trigger the workflow.
+</Warning>
+
+## Submission steps
+
+<Steps>
+  <Step title="Find react-native-libraries.json">
+    Open [`react-native-libraries.json`](https://github.com/react-native-community/directory/blob/main/react-native-libraries.json) in the repository. This is the only file you need to edit.
+  </Step>
+  <Step title="Add your entry at the end of the file">
+    Scroll to the very end of the JSON array and add your entry as the last item. The file order determines the "Recently added" sort option on the directory, so entries must go at the end.
+
+    Use the template below as your starting point:
+
+    ```json
+    {
+      "githubUrl": "<GITHUB REPOSITORY URL>",
+      "npmPkg": "<OPTIONAL NPM PACKAGE NAME>",
+      "examples": [
+        "<THE URL TO REPO>",
+        "<THE URL TO A SNACK>"
+      ],
+      "images": ["<PUBLIC URL TO RELATED IMAGE>"],
+      "ios": false,
+      "android": false,
+      "web": false,
+      "windows": false,
+      "macos": false,
+      "tvos": false,
+      "visionos": false,
+      "expoGo": false,
+      "fireos": false,
+      "horizon": false,
+      "vegaos": false,
+      "newArchitecture": false,
+      "configPlugin": false,
+      "unmaintained": false,
+      "dev": false,
+      "template": false
+    }
+    ```
+
+    <Tip>
+      Follow the field order and indentation shown above. Omit any field whose value is `false`, and leave optional fields empty unless you have a value for them. A cleanup script strips redundant `false` values automatically, but matching the expected format avoids unnecessary diff noise.
+    </Tip>
+  </Step>
+  <Step title="Fill in the required field">
+    Replace `<GITHUB REPOSITORY URL>` with the full HTTPS URL to your repository, for example:
+
+    ```
+    https://github.com/your-org/your-library
+    ```
+
+    All other fields are optional. Remove any fields you are not setting.
+  </Step>
+  <Step title="Set platform and compatibility flags">
+    Set each platform field (`ios`, `android`, `web`, etc.) to `true` for the platforms your library supports. See [Platform compatibility](/contributing/platform-compatibility) for what each field means and which ones require an example link.
+  </Step>
+  <Step title="Open a pull request">
+    Commit your change and open a PR against the `main` branch. CI will validate that the entry has a valid GitHub URL, that the npm package exists, and that all field names are recognized.
+  </Step>
+</Steps>
+
+## Monorepo packages
+
+If your package lives inside a monorepo (for example, `https://github.com/expo/expo/tree/main/packages/expo-web-browser`), point `githubUrl` at the package subdirectory, not the repository root.
+
+You also need to set `npmPkg` explicitly, because the directory would otherwise derive the package name from the repository name:
+
+```json
+{
+  "githubUrl": "https://github.com/expo/expo/tree/main/packages/expo-web-browser",
+  "npmPkg": "expo-web-browser"
+}
+```
+
+When `githubUrl` points to a subdirectory, the name, description, homepage, and keywords are read from the `package.json` in that subdirectory. GitHub stars, forks, and issues are always based on the root repository.
+
+<Note>
+  If `githubUrl` points to a monorepo root instead of the package subdirectory, CI will detect a mismatch between the extracted `package.json` name and the npm package name and reject the PR.
+</Note>
+
+## Field reference
+
+For a full description of every field you can set in an entry, see [Library entry fields](/contributing/library-fields).

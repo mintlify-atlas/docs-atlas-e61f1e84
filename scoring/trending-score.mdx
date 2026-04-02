@@ -1,0 +1,64 @@
+---
+title: "Trending Score"
+description: "How the Trending Score measures a library's download growth and popularity."
+---
+
+The Trending Score measures a library's **download growth**, not its absolute popularity. A library with fewer total downloads can still rank highly if its download count is growing quickly relative to its recent history.
+
+You can browse trending libraries at [reactnative.directory/trending](https://reactnative.directory/trending).
+
+## How it works
+
+The score starts from a **Popularity Gain** value derived from the library's weekly and monthly download counts. Modifiers are then added or subtracted based on download volume, GitHub stars, maintenance status, and package age.
+
+## Popularity Gain
+
+Popularity Gain is the base for the Trending Score. It compares weekly downloads against a per-week estimate derived from the monthly download count:
+
+```typescript
+(lastWeekDownloads / Math.floor(monthlyDownloads / 4.25)) / 5
+```
+
+A value above 0 means downloads are growing; a value at or below 0 means downloads are flat or declining. The value range can be quite wide, but most packages fall within ±100.
+
+## Popularity grades
+
+The final Trending Score maps to one of five grades:
+
+| Grade | Threshold |
+|---|---|
+| HOT! | Popularity > 0.5 |
+| Popular | Popularity > 0.25 |
+| Quite popular | Popularity > 0.1 |
+| Trending | Popularity > 0 |
+| Declining | Popularity ≤ 0 |
+
+## Score modifiers
+
+The following modifiers are applied to the Popularity Gain to produce the final Trending Score.
+
+<AccordionGroup>
+  <Accordion title="Many downloads (+0.25)">
+    Libraries with more than 15,000 monthly downloads **and** a Popularity Gain above 0.25 receive this bonus.
+  </Accordion>
+
+  <Accordion title="Not many downloads (-0.75)">
+    Libraries with fewer than 1,000 monthly downloads receive this penalty.
+  </Accordion>
+
+  <Accordion title="Not many followers (-0.25)">
+    Libraries with fewer than 25 GitHub stars receive this penalty.
+  </Accordion>
+
+  <Accordion title="No longer maintained (-0.75)">
+    Libraries marked as unmaintained receive this penalty.
+  </Accordion>
+
+  <Accordion title="Very fresh package (-0.5)">
+    Libraries whose first version was published less than 7 days ago receive this penalty.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Libraries without npm download data receive a Trending Score of `-1` and are not shown on the trending page. You can view the source code used to calculate Trending Scores in [`scripts/calculate-score.ts`](https://github.com/react-native-community/directory/blob/main/scripts/calculate-score.ts).
+</Note>

@@ -1,0 +1,253 @@
+---
+title: "Library entry fields"
+description: "Reference for all fields you can set in the react-native-libraries.json dataset."
+---
+
+Each entry in `react-native-libraries.json` is a JSON object. Only `githubUrl` is required. All other fields are optional — omit a field entirely rather than setting it to `false` or an empty value.
+
+<Note>
+  The allowed field names are enforced by validation scripts. Any key not listed here will cause the PR to fail.
+</Note>
+
+## General fields
+
+<AccordionGroup>
+  <Accordion title="githubUrl (required)">
+    **Type:** `string`
+
+    The full HTTPS URL to the package's GitHub repository. This is the only required field.
+
+    ```json
+    "githubUrl": "https://github.com/your-org/your-library"
+    ```
+
+    For monorepo packages, point to the subdirectory containing the package's `package.json`:
+
+    ```json
+    "githubUrl": "https://github.com/expo/expo/tree/main/packages/expo-web-browser"
+    ```
+
+    Only GitHub URLs are supported. The URL must match the pattern `https://github.com/owner/repo` or `https://github.com/owner/repo/tree/branch/path`.
+
+    <Warning>
+      The package must also be published to the npm registry. The npm package name is derived from the repository name unless you set `npmPkg` explicitly.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="npmPkg">
+    **Type:** `string`
+
+    The npm package name. By default the directory uses the last segment of the GitHub repository URL as the package name. Set this field when:
+
+    - The repository name differs from the npm package name (for example, scoped packages like `@expo/react-native-action-sheet`)
+    - The package is part of a monorepo
+
+    ```json
+    "npmPkg": "@expo/react-native-action-sheet"
+    ```
+  </Accordion>
+
+  <Accordion title="examples">
+    **Type:** `array of strings`
+
+    URLs to example projects or Expo Snacks that demonstrate the library in use.
+
+    ```json
+    "examples": [
+      "https://github.com/your-org/your-library/tree/main/example",
+      "https://snack.expo.io/SkRP2Ehrb"
+    ]
+    ```
+
+    Out-of-tree platform fields (`windows`, `macos`, `tvos`, `visionos`) require at least one example or app link that demonstrates the library running on that platform.
+  </Accordion>
+
+  <Accordion title="images">
+    **Type:** `array of strings`
+
+    Public URLs to static images or GIFs showing the library's functionality. Images must end with a supported extension: `.jpg`, `.jpeg`, `.gif`, `.png`, or `.webp`.
+
+    ```json
+    "images": [
+      "https://github.com/your-org/your-library/blob/main/demo.gif?raw=true"
+    ]
+    ```
+
+    <Tip>
+      Do not add logotypes or branding materials. Avoid linking multiple assets that show the same feature.
+    </Tip>
+  </Accordion>
+</AccordionGroup>
+
+## Platform fields
+
+Set a platform field to `true` when your library works on that platform. See [Platform compatibility](/contributing/platform-compatibility) for more detail on each platform and the requirements for out-of-tree platforms.
+
+<AccordionGroup>
+  <Accordion title="ios">
+    **Type:** `boolean`
+
+    The library works on iOS using the standard React Native iOS renderer.
+  </Accordion>
+
+  <Accordion title="android">
+    **Type:** `boolean`
+
+    The library works on Android using the standard React Native Android renderer.
+  </Accordion>
+
+  <Accordion title="web">
+    **Type:** `boolean`
+
+    The library can be used with [`react-native-web`](https://github.com/necolas/react-native-web).
+  </Accordion>
+
+  <Accordion title="windows">
+    **Type:** `boolean`
+
+    The library can be used with [`react-native-windows`](https://github.com/microsoft/react-native-windows).
+
+    Requires an entry in `examples` that demonstrates the library on Windows.
+  </Accordion>
+
+  <Accordion title="macos">
+    **Type:** `boolean`
+
+    The library can be used with [`react-native-macos`](https://github.com/microsoft/react-native-macos).
+
+    Requires an entry in `examples` that demonstrates the library on macOS.
+  </Accordion>
+
+  <Accordion title="tvos">
+    **Type:** `boolean`
+
+    The library can be used with [`react-native-tvos`](https://github.com/react-native-tvos/react-native-tvos).
+
+    Requires an entry in `examples` that demonstrates the library on tvOS.
+  </Accordion>
+
+  <Accordion title="visionos">
+    **Type:** `boolean`
+
+    The library can be used with [`react-native-visionos`](https://github.com/callstack/react-native-visionos).
+
+    Requires an entry in `examples` that demonstrates the library on visionOS.
+  </Accordion>
+
+  <Accordion title="fireos">
+    **Type:** `boolean`
+
+    The library works on Amazon Fire OS.
+  </Accordion>
+
+  <Accordion title="horizon">
+    **Type:** `boolean`
+
+    The library works on Meta Horizon OS.
+  </Accordion>
+
+  <Accordion title="vegaos">
+    **Type:** `boolean | string`
+
+    The library works with [Vega OS](https://developer.amazon.com/apps-and-games/vega). If a separate or additional npm package is required for full Vega OS support, supply that package name as a string instead of `true`:
+
+    ```json
+    "vegaos": "@amazon-devices/react-native-async-storage__async-storage"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Compatibility fields
+
+<AccordionGroup>
+  <Accordion title="expoGo">
+    **Type:** `boolean`
+
+    The library works inside [Expo Go](https://docs.expo.dev/get-started/expo-go/) without requiring a development build or prebuild step.
+
+    <Tip>
+      Any library can be used with Expo if you use dev clients or prebuild. Only set `expoGo: true` when the library works specifically without those steps.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="newArchitecture">
+    **Type:** `boolean | 'new-arch-only'`
+
+    Indicates New Architecture support:
+
+    - `true` — supports both the New Architecture and the Old Architecture
+    - `false` — does not support the New Architecture
+    - `"new-arch-only"` — supports only the New Architecture; the Old Architecture is not supported
+
+    Omitting the field results in an "untested" status, unless the `bun data:update` script detects support automatically.
+
+    <Tip>
+      Set this field only when automatic detection fails for your package, even though it does support the New Architecture. See [Platform compatibility](/contributing/platform-compatibility) for details on auto-detection.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="newArchitectureNote">
+    **Type:** `string`
+
+    An optional note to provide context about the New Architecture support status when a boolean is not sufficient.
+
+    ```json
+    "newArchitectureNote": "Only iOS supported"
+    ```
+  </Accordion>
+
+  <Accordion title="configPlugin">
+    **Type:** `boolean | string`
+
+    Indicates whether the library includes an [Expo config plugin](https://docs.expo.dev/config-plugins/introduction/):
+
+    - `true` — the library ships its own config plugin
+    - A URL string — a third-party config plugin is available at that URL
+
+    ```json
+    "configPlugin": "https://github.com/expo/config-plugins/tree/main/packages/react-native-pdf"
+    ```
+
+    This field is detected automatically during `bun data:update` if omitted. Set it manually only when auto-detection does not pick it up.
+  </Accordion>
+</AccordionGroup>
+
+## Tag fields
+
+<AccordionGroup>
+  <Accordion title="unmaintained">
+    **Type:** `boolean`
+
+    Marks the library as no longer maintained. The directory also sets this automatically when a repository is archived on GitHub or has not received a push in more than two years.
+
+    Use the `alternatives` field alongside this to point users toward replacement libraries.
+  </Accordion>
+
+  <Accordion title="dev">
+    **Type:** `boolean`
+
+    Marks the library as a development tool — something that should be installed as a `devDependency` or run via `npx`/`bunx` rather than shipped to end users.
+  </Accordion>
+
+  <Accordion title="template">
+    **Type:** `boolean`
+
+    Marks the entry as a new project template rather than an installable library.
+  </Accordion>
+</AccordionGroup>
+
+## Additional context fields
+
+<AccordionGroup>
+  <Accordion title="alternatives">
+    **Type:** `array of strings`
+
+    A list of npm package names that serve as alternatives or replacements for this library. Use this when the library is unmaintained or does not support the New Architecture.
+
+    ```json
+    "alternatives": ["expo-camera", "react-native-vision-camera"]
+    ```
+
+    Each alternative must already be listed in the directory and must not itself be marked as unmaintained.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,59 @@
+---
+title: "API overview"
+description: "Access React Native Directory data programmatically using the public JSON API."
+---
+
+React Native Directory exposes a public JSON API you can use to query library data, check compatibility metadata, and retrieve aggregated statistics — no authentication required.
+
+## Base URL
+
+All endpoints are relative to:
+
+```
+https://reactnative.directory
+```
+
+## Authentication
+
+None. The API is fully public and requires no API key or token.
+
+## Caching
+
+Responses are cached publicly with a 10-minute TTL (`s-maxage=600, stale-while-revalidate=300`). The one exception is requests to `GET /api/libraries` that include the `bookmarks` parameter — those responses depend on a user-specific cookie and are never cached publicly.
+
+## Quick example
+
+Fetch libraries matching "camera", sorted by downloads:
+
+```bash
+curl "https://reactnative.directory/api/libraries?search=camera&order=downloads&direction=descending&limit=5"
+```
+
+## LLM / AI integrations
+
+React Native Directory also publishes two plain-text files designed for use with LLMs and AI tools:
+
+| File | Description |
+|------|-------------|
+| `https://reactnative.directory/llms.txt` | Compact summary of the directory and API |
+| `https://reactnative.directory/llms-full.txt` | Full dataset export suitable for retrieval-augmented generation |
+
+## Available endpoints
+
+<CardGroup cols={2}>
+  <Card title="GET /api/libraries" icon="list" href="/api/libraries">
+    List, search, filter, and paginate React Native libraries.
+  </Card>
+  <Card title="POST /api/libraries/check" icon="circle-check" href="/api/libraries-check">
+    Look up compatibility metadata for a batch of npm package names.
+  </Card>
+  <Card title="GET /api/libraries/statistic" icon="chart-bar" href="/api/libraries-statistic">
+    Retrieve aggregated statistics about the React Native Directory dataset.
+  </Card>
+  <Card title="GET /api/library" icon="magnifying-glass" href="/api/library">
+    Look up one or more libraries by npm package name.
+  </Card>
+  <Card title="GET /api/proxy/npm-stat" icon="arrow-trend-up" href="/api/npm-stat-proxy">
+    Fetch historical daily download counts for an npm package.
+  </Card>
+</CardGroup>

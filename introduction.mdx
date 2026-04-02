@@ -1,0 +1,98 @@
+---
+title: "Introduction"
+description: "React Native Directory is a searchable and filterable catalog of React Native libraries."
+---
+
+React Native Directory is a website where you can browse, search, and evaluate libraries that are compatible with React Native. It indexes over 2,300 libraries and surfaces the metadata you need to make an informed choice — platform support, New Architecture compatibility, download trends, GitHub activity, and a computed quality score.
+
+The directory is available at [reactnative.directory](https://reactnative.directory).
+
+## What it does
+
+Every library in the directory is tagged with the platforms it supports, so you can filter to exactly what your project needs:
+
+- **Core platforms** — iOS, Android, Web (via `react-native-web`)
+- **Out-of-tree platforms** — Windows, macOS, tvOS, visionOS
+- **Specialty platforms** — Fire OS, Meta Horizon OS, Vega OS
+- **Expo Go** — indicates whether the library works in the Expo Go sandbox without a dev client or prebuild
+
+Beyond platform tags, each entry shows:
+
+- **New Architecture support** — whether the library supports both architectures, only the New Architecture, or has untested status
+- **Directory Score** — a computed quality score based on maintenance activity, popularity, documentation, and other factors
+- **Download stats** — monthly and weekly npm download counts
+- **GitHub stats** — stars, open issues, last push date, and more
+- **Bookmarks** — save libraries across sessions using the bookmark feature; bookmarked libraries are accessible through a dedicated filter
+
+## Who it's for
+
+<CardGroup cols={3}>
+  <Card
+    title="React Native developers"
+    icon="mobile"
+    href="/getting-started"
+  >
+    Search and filter 2,300+ libraries to find the right one for your project.
+  </Card>
+  <Card
+    title="Library authors"
+    icon="code"
+    href="/contributing/adding-a-library"
+  >
+    Submit your package to get it listed and keep its metadata up to date.
+  </Card>
+  <Card
+    title="Tool builders"
+    icon="wrench"
+    href="/api/overview"
+  >
+    Use the public JSON API to integrate directory data into editors, CLIs, or other tooling.
+  </Card>
+</CardGroup>
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card
+    title="Search and filter"
+    icon="magnifying-glass"
+    href="/getting-started"
+  >
+    Full-text search combined with platform, architecture, and quality filters lets you narrow down to the exact libraries you need.
+  </Card>
+  <Card
+    title="Directory Score"
+    icon="chart-bar"
+    href="/scoring/directory-score"
+  >
+    Each library receives a score based on maintenance, popularity, documentation quality, and other signals.
+  </Card>
+  <Card
+    title="New Architecture detection"
+    icon="bolt"
+    href="/contributing/platform-compatibility"
+  >
+    Libraries are automatically checked for New Architecture (Fabric / TurboModules) support, with manual overrides available.
+  </Card>
+  <Card
+    title="Public API"
+    icon="globe"
+    href="/api/overview"
+  >
+    A JSON API lets you query, filter, and retrieve library data programmatically for use in your own tools.
+  </Card>
+  <Card
+    title="VS Code extension"
+    icon="rectangle-code"
+    href="/getting-started#vs-code-extension"
+  >
+    Browse and evaluate libraries without leaving your editor using the official VS Code extension.
+  </Card>
+  <Card
+    title="Bookmarks"
+    icon="bookmark"
+    href="/getting-started#bookmarks"
+  >
+    Bookmark libraries in your browser and filter to your saved list at any time.
+  </Card>
+</CardGroup>

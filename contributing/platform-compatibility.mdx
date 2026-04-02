@@ -1,0 +1,94 @@
+---
+title: "Platform compatibility"
+description: "How to declare platform support and compatibility for your library entry."
+---
+
+Platform fields tell the directory which platforms and runtimes your library supports. Each field is a boolean (or occasionally a string) that you set in your entry in `react-native-libraries.json`.
+
+## Core platforms
+
+These three platforms use the standard React Native renderers and have no additional requirements.
+
+| Field | Platform |
+|---|---|
+| `ios` | iOS via the standard React Native iOS renderer |
+| `android` | Android via the standard React Native Android renderer |
+| `web` | Web via [`react-native-web`](https://github.com/necolas/react-native-web) |
+
+## Out-of-tree platforms
+
+Out-of-tree platforms use community-maintained renderers. Because these are harder to verify, **each out-of-tree platform field requires at least one entry in `examples`** that demonstrates the library running on that platform — either a GitHub repository or a link to an app.
+
+<Warning>
+  PRs that set an out-of-tree platform field without a corresponding example link will fail validation.
+</Warning>
+
+| Field | Platform | Renderer package |
+|---|---|---|
+| `windows` | Windows | [`react-native-windows`](https://github.com/microsoft/react-native-windows) |
+| `macos` | macOS | [`react-native-macos`](https://github.com/microsoft/react-native-macos) |
+| `tvos` | tvOS | [`react-native-tvos`](https://github.com/react-native-tvos/react-native-tvos) |
+| `visionos` | visionOS | [`react-native-visionos`](https://github.com/callstack/react-native-visionos) |
+
+## Other platform fields
+
+These fields cover additional runtimes and do not require examples.
+
+| Field | Runtime |
+|---|---|
+| `fireos` | Amazon Fire OS |
+| `horizon` | Meta Horizon OS |
+| `vegaos` | Amazon Vega OS (accepts `true` or an npm package name string if a companion package is needed) |
+
+## Expo Go compatibility
+
+<Tip>
+  Any library can be used with Expo if you use [dev clients](https://docs.expo.dev/develop/development-builds/introduction/) or [prebuild](https://docs.expo.dev/workflow/continuous-native-generation/). The `expoGo` field is specifically about the sandboxed Expo Go app.
+</Tip>
+
+Set `expoGo: true` only when your library works inside [Expo Go](https://docs.expo.dev/get-started/expo-go/) without a development build or prebuild. Libraries that require native code not bundled with Expo Go cannot set this field.
+
+## New Architecture support
+
+The `newArchitecture` field accepts three values:
+
+| Value | Meaning |
+|---|---|
+| `true` | Supports both the New Architecture and the Old Architecture |
+| `false` | Does not support the New Architecture |
+| `"new-arch-only"` | Supports only the New Architecture; Old Architecture is not supported |
+
+Omitting `newArchitecture` entirely results in an "untested" status on the directory, unless the `bun data:update` script detects support automatically from the package contents.
+
+Use `newArchitectureNote` alongside `newArchitecture` when a simple boolean is not enough to describe the situation:
+
+```json
+{
+  "githubUrl": "https://github.com/your-org/your-library",
+  "newArchitecture": true,
+  "newArchitectureNote": "Only iOS supported on New Architecture"
+}
+```
+
+### Auto-detection
+
+During `bun data:update`, the script inspects each package's source to detect New Architecture support (by examining module type — Expo module, Nitro module, Turbo module). If detection succeeds, you do not need to set `newArchitecture` manually.
+
+<Tip>
+  Set `newArchitecture` manually only when automatic detection fails for your package despite it supporting the New Architecture.
+</Tip>
+
+## Config plugin
+
+The `configPlugin` field indicates whether your library includes an [Expo config plugin](https://docs.expo.dev/config-plugins/introduction/):
+
+| Value | Meaning |
+|---|---|
+| `true` | The library ships its own config plugin |
+| A URL string | A third-party config plugin is available at that URL |
+
+```json
+"configPlugin": "https://github.com/expo/config-plugins/tree/main/packages/react-native-pdf"
+```
+
+Like `newArchitecture`, `configPlugin` is also detected automatically during `bun data:update`. You only need to set it manually if auto-detection misses your package.

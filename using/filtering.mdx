@@ -1,0 +1,112 @@
+---
+title: "Filtering and searching"
+description: "Use filters and full-text search to find libraries that meet your requirements."
+---
+
+The `/packages` view exposes a search bar and a set of filters that let you narrow the library list to exactly what your project needs. Every filter maps to a URL query parameter, so filtered views are fully shareable.
+
+## Full-text search
+
+Type any package name, keyword, or topic into the search bar. The query is sent as the `search` query parameter.
+
+```
+https://reactnative.directory/packages?search=camera
+```
+
+When a search term is present, results are automatically sorted by **relevance**. Applying an explicit `order` parameter overrides this behavior.
+
+## Platform filters
+
+Filter to libraries that support a specific platform. Each filter is a boolean (`true` / `false`) passed as a query parameter.
+
+| Query param | Platform |
+|---|---|
+| `ios` | iOS |
+| `android` | Android |
+| `web` | Web (react-native-web) |
+| `windows` | Windows |
+| `macos` | macOS |
+| `expoGo` | Expo Go (works without a dev client or prebuild) |
+| `tvos` | tvOS |
+| `visionos` | visionOS |
+| `fireos` | Fire OS |
+| `horizon` | Meta Horizon OS |
+| `vegaos` | Vega OS |
+
+## Architecture filters
+
+Narrow to libraries with specific module architecture characteristics.
+
+| Query param | Meaning |
+|---|---|
+| `newArchitecture` | Supports the New Architecture (Fabric / TurboModules) |
+| `expoModule` | Built as an Expo module |
+| `nitroModule` | Built with Nitro Modules |
+| `turboModule` | Implemented as a Turbo Module |
+
+## Feature filters
+
+Filter by the presence of specific attributes.
+
+| Query param | Meaning |
+|---|---|
+| `hasExample` | Has a linked example project |
+| `hasImage` | Has a screenshot or preview image |
+| `hasTypes` | Includes TypeScript type definitions |
+| `hasNativeCode` | Contains native (non-JS) code |
+| `configPlugin` | Includes an Expo config plugin |
+
+## Quality filters
+
+Filter by maintenance and activity signals.
+
+| Query param | Meaning |
+|---|---|
+| `isMaintained` | Not marked as unmaintained |
+| `isPopular` | Above a minimum popularity threshold |
+| `wasRecentlyUpdated` | Pushed to GitHub within a recent window |
+
+## Skip categories
+
+Exclude certain categories of packages from the results.
+
+| Query param | Excludes |
+|---|---|
+| `skipLibs` | Standalone libraries (inverts — shows only tools/templates) |
+| `skipTools` | Dev tools and CLI utilities |
+| `skipTemplates` | Project templates |
+
+## Numeric filters
+
+Set minimum thresholds to filter out low-traffic or niche packages.
+
+| Query param | Meaning |
+|---|---|
+| `minPopularity` | Minimum popularity score (0–100) |
+| `minMonthlyDownloads` | Minimum monthly npm download count |
+
+## Owner and topic filters
+
+| Query param | Meaning |
+|---|---|
+| `owner` | Filter by GitHub organization or user name (e.g. `owner=facebook`) |
+| `topic` | Filter by a GitHub repository topic (e.g. `topic=maps`) |
+
+## Other filters
+
+| Query param | Meaning |
+|---|---|
+| `nightlyProgram` | Show only libraries enrolled in the React Native Nightly Program |
+| `bookmarks` | Show only your bookmarked libraries (see [Bookmarks](/using/bookmarks)) |
+
+## Composing filters
+
+All filters are composable — combine any set in a single URL. The example below finds maintained, TypeScript-typed libraries that support both iOS and Android, sorted by download count:
+
+```
+https://reactnative.directory/packages?ios=true&android=true&hasTypes=true&isMaintained=true&order=downloads
+```
+
+<Tip>
+  Share a filtered URL with your team to give everyone the same view of the library landscape for a given project.
+</Tip>

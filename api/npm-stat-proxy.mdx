@@ -1,0 +1,78 @@
+---
+title: "GET /api/proxy/npm-stat"
+description: "Fetch historical download counts for an npm package via the npm-stat.com proxy."
+---
+
+Proxies to [npm-stat.com](https://npm-stat.com) to return daily download counts for the past month for a given npm package. The server performs no additional data processing — the response is passed through directly from npm-stat.com.
+
+- **Method:** GET
+- **Path:** `/api/proxy/npm-stat`
+
+## Query parameters
+
+<ParamField query="name" type="string" required>
+  npm package name to retrieve download history for.
+</ParamField>
+
+## Response
+
+<ResponseField name="[packageName]" type="object">
+  An object keyed by date string, where each value is the download count for that day.
+
+  <Expandable title="Date map fields">
+    <ResponseField name="[YYYY-MM-DD]" type="number">
+      Number of downloads on that date.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Warning>
+  This endpoint is subject to the same CORS and rate limiting policies as the underlying npm-stat.com API. If npm-stat.com returns a non-200 status, this endpoint forwards that status with an empty JSON object `{}` as the body.
+</Warning>
+
+<Note>
+  The date range is calculated at request time: from approximately one month ago to today.
+</Note>
+
+## Example
+
+```bash
+curl "https://reactnative.directory/api/proxy/npm-stat?name=react-native"
+```
+
+```json
+{
+  "react-native": {
+    "2026-01-18": 319495,
+    "2026-01-19": 693157,
+    "2026-01-20": 810833,
+    "2026-01-21": 837204,
+    "2026-01-22": 845437,
+    "2026-01-23": 777158,
+    "2026-01-24": 378434,
+    "2026-01-25": 339869,
+    "2026-01-26": 813923,
+    "2026-01-27": 888545,
+    "2026-01-28": 877008,
+    "2026-01-29": 880932,
+    "2026-01-30": 855686,
+    "2026-01-31": 390039,
+    "2026-02-01": 380828,
+    "2026-02-02": 853673,
+    "2026-02-03": 898431,
+    "2026-02-04": 911421,
+    "2026-02-05": 935844,
+    "2026-02-06": 879993,
+    "2026-02-07": 417938,
+    "2026-02-08": 403069,
+    "2026-02-09": 891276,
+    "2026-02-10": 969193,
+    "2026-02-11": 942355,
+    "2026-02-12": 939358,
+    "2026-02-13": 834084,
+    "2026-02-14": 390313,
+    "2026-02-15": 403198,
+    "2026-02-16": 771778
+  }
+}
+```

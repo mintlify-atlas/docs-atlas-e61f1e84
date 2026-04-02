@@ -1,0 +1,61 @@
+---
+title: "POST /api/libraries/check"
+description: "Look up compatibility metadata for a batch of npm package names."
+---
+
+Accepts a JSON array of npm package names and returns compatibility metadata for each one, including New Architecture support status and maintenance state.
+
+- **Method:** POST
+- **Path:** `/api/libraries/check`
+- **Content-Type:** `application/json`
+
+## Request body
+
+<ParamField body="packages" type="string[]" required>
+  Array of npm package names to look up.
+</ParamField>
+
+## Response
+
+The response is a JSON object keyed by package name. Each value contains the compatibility metadata for that package.
+
+<ResponseField name="[packageName]" type="object">
+  Compatibility metadata for the requested package.
+
+  <Expandable title="Package metadata fields">
+    <ResponseField name="newArchitecture" type="string" required>
+      New Architecture support status. One of:
+
+      | Value | Meaning |
+      |-------|---------|
+      | `supported` | The library supports the New Architecture. |
+      | `new-arch-only` | The library requires the New Architecture and does not support the legacy architecture. |
+      | `unsupported` | The library does not support the New Architecture. |
+      | `untested` | No information is available about New Architecture support. |
+    </ResponseField>
+
+    <ResponseField name="unmaintained" type="boolean">
+      `true` if the library has been marked as unmaintained in the directory. Omitted when `false`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Note>
+  If a requested package name is not found in the directory, its value in the response object will be `undefined` (the key may be absent).
+</Note>
+
+## Example
+
+```bash
+curl -X POST "https://reactnative.directory/api/libraries/check" \
+  -H "Content-Type: application/json" \
+  -d '{"packages": ["react-native-reanimated"]}'
+```
+
+```json
+{
+  "react-native-reanimated": {
+    "newArchitecture": "supported"
+  }
+}
+```
